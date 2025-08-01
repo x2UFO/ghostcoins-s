@@ -1,0 +1,262 @@
+style.css
+body {
+  margin: 0; padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0b132b;
+  color: #e0f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  background-color: #07162d;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,255,255,0.2);
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #00fff7;
+  letter-spacing: 2px;
+  user-select: none;
+}
+
+nav {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.dashboard-btn {
+  background: linear-gradient(90deg, #00fff7, #00d9d9);
+  border: none;
+  padding: 12px 24px;
+  color: #07162d;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 8px #00fff7;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.dashboard-btn:hover {
+  box-shadow: 0 0 20px #00fff7;
+  transform: scale(1.05);
+  color: #fff;
+}
+
+main.dashboard {
+  max-width: 900px;
+  width: 90%;
+  margin: 30px auto 50px auto;
+  background: #07162d;
+  border-radius: 20px;
+  padding: 25px 30px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+}
+
+main h2 {
+  color: #00fff7;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-align: center;
+}
+
+.solde-section h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 40px;
+  user-select: none;
+}
+
+.calculateur-section form {
+  background: #0b1a3f;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: inset 0 0 20px #00fff7;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 450px;
+  margin: 0 auto 40px auto;
+}
+
+.calculateur-section label {
+  color: #b0ffff;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.calculateur-section input[type="number"] {
+  margin-top: 6px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #112d59;
+  color: #e0f7fa;
+  box-shadow: inset 0 0 8px #00fff7;
+  transition: box-shadow 0.3s ease;
+}
+.calculateur-section input[type="number"]:focus {
+  box-shadow: 0 0 12px #00fff7;
+}
+
+.calculateur-section p {
+  text-align: center;
+  color: #00fff7;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  margin: 0 0 10px 0;
+}
+
+.calculateur-section button {
+  background: #00fff7;
+  border: none;
+  padding: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  color: #07162d;
+  box-shadow: 0 0 15px #00fff7;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+.calculateur-section button:hover {
+  background: #00d9d9;
+  box-shadow: 0 0 25px #00d9d9;
+  transform: scale(1.05);
+}
+
+#resultatCalcul {
+  color: #80ffff;
+  font-weight: 600;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 1.1rem;
+  min-height: 3em;
+  user-select: none;
+}
+
+.graphique-section {
+  background: #0b1a3f;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: inset 0 0 25px #00fff7;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+canvas#graphiqueGains {
+  display: block;
+  max-width: 100%;
+  height: auto !important;
+  margin: 0 auto;
+  user-select: none;
+}
+
+@media (max-width: 600px) {
+  .calculateur-section form {
+    width: 100%;
+    padding: 15px;
+  }
+  main.dashboard {
+    width: 95%;
+    padding: 20px 15px;
+  }
+}
+.form-container {
+  max-width: 400px;
+  margin: 40px auto;
+  background: #07162d;
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+  color: #e0f7fa;
+}
+
+form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #00fff7;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  user-select: none;
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+form input[type="email"],
+form input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: none;
+  background: #112d59;
+  color: #e0f7fa;
+  box-shadow: inset 0 0 8px #00fff7;
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+form input[type="email"]:focus,
+form input[type="password"]:focus {
+  box-shadow: 0 0 14px #00fff7;
+}
+
+form p {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #80ffff;
+}
+
+form p .link-btn {
+  color: #00fff7;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+form p .link-btn:hover {
+  color: #00d9d9;
+}
+
+.dashboard-btn {
+  width: 100%;
+  padding: 12px 0;
+  background: linear-gradient(90deg, #00fff7, #00d9d9);
+  border-radius: 30px;
+  border: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #07162d;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00fff7;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.dashboard-btn:hover {
+  background: #00d9d9;
+  box-shadow: 0 0 25px #00d9d9;
+  transform: scale(1.05);
+}

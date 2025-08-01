@@ -1,0 +1,46 @@
+retrait.html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Retrait - GhostCoins</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="GhostCoins Logo" class="logo">
+    <h1>Demande de retrait</h1>
+  </header>
+
+  <main class="depot-container">
+    <form id="form-retrait">
+      <label for="wallet">Adresse du portefeuille USDT (BEP20) :</label>
+      <input type="text" id="wallet" name="wallet" placeholder="Votre adresse BEP20" required>
+
+      <label for="montant">Montant à retirer :</label>
+      <input type="number" id="montant" name="montant" placeholder="Montant en USDT" min="1" required>
+
+      <button type="submit">Envoyer la demande</button>
+    </form>
+
+    <p class="note">* Les retraits sont traités sous 24 heures. Assurez-vous que votre adresse BEP20 est correcte.</p>
+    <a href="index.html" class="retour-btn">Retour au tableau de bord</a>
+  </main>
+
+  <script>
+    document.getElementById("form-retrait").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const wallet = document.getElementById("wallet").value;
+      const montant = document.getElementById("montant").value;
+
+      if (wallet && montant > 0) {
+        alert("Votre demande de retrait de " + montant + " USDT vers " + wallet + " a bien été enregistrée.");
+        // Ici, ajouter une logique pour enregistrer ou envoyer la demande
+        document.getElementById("form-retrait").reset();
+      } else {
+        alert("Veuillez remplir correctement tous les champs.");
+      }
+    });
+  </script>
+</body>
+</html>

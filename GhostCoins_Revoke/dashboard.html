@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard - GhostCoins</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>GhostCoins - Dashboard</header>
+
+  <main class="dashboard">
+
+    <section class="solde-section">
+      <h2>Votre solde : <span id="solde">0.00</span> USDT</h2>
+    </section>
+
+    <nav>
+      <a href="depot.html" class="dashboard-btn">💸 Déposer</a>
+      <a href="retrait.html" class="dashboard-btn">🏧 Retirer</a>
+      <a href="historique.html" class="dashboard-btn">📜 Historique</a>
+    </nav>
+
+    <section class="calculateur-section">
+      <form id="calculateurForm">
+        <label>
+          Montant à investir (USDT) :
+          <input type="number" id="montant" min="20" max="5000" value="20" required />
+        </label>
+
+        <label>
+          Durée (jours) :
+          <input type="number" id="jours" min="5" max="60" value="5" required />
+        </label>
+
+        <p>Taux d'intérêt fixe : 14% par jour</p>
+
+        <button type="submit">Calculer</button>
+      </form>
+
+      <div id="resultatCalcul"></div>
+    </section>
+
+    <section class="graphique-section">
+      <canvas id="graphiqueGains" width="700" height="350"></canvas>
+    </section>
+
+  </main>
+
+  <script>
+    // --- GESTION SOLDE ---
+    let solde = 0;
+
+    window.onload = function () {
+      const saved = localStorage.getItem("ghostcoins_solde");
+      if (saved !== null) {
+        solde = parseFloat(saved);
+        document.getElementById("solde").textContent = solde.toFixed(2);
+      }
+      drawGraph(0, 0); // graphique vide au départ
+    };
+
+    // --- CALCULATEUR ---
+    const form = document.getElementById("calculateurForm");
+    const resultatDiv = document.getElementById("resultatCalcul");
+    const tauxParJour = 0.14; // 14%
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let montant = parseFloat(document.getElementById("montant").value);
+      let jours = parseInt(document.getElementById("jours").value);
+
+      if (
+        isNaN(montant) ||
+        isNaN(jours) ||
+        montant < 20 ||
+        montant > 5000 ||
+        jours < 5 ||
+        jours > 60
+      ) {
+        resultatDiv.textContent = "Veuillez saisir un montant et une durée valides.";
+        return;
+      }
+
+      // Calcul des gains totaux (intérêt simple)
+      // Intérêt total = montant * tauxParJour * jours
+      // Montant final = montant + intérêt total
+      let interetTotal = montant * tauxParJour * jours;
+      let montantFinal = montant + interetTotal;
+
+      resultatDiv.innerHTML =
+        `<strong>Investissement:</strong> ${montant.toFixed(2)} USDT<br>` +
+        `<strong>Durée:</strong> ${jours} jours<br>` +
+        `<strong>Gain total estimé:</strong> ${interetTotal.toFixed(2)} USDT<br>` +
+        `<strong>Montant final estimé:</strong> ${montantFinal.toFixed(2)} USDT`;
+
+      drawGraph(montant, jours);
+    });
+
+    // --- GRAPHIQUE ---
+    let chartInstance = null;
+
+    function drawGraph(montant, jours) {
+      const ctx = document.getElementById("graphiqueGains").getContext("2d");
+
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+
+      if (montant === 0 || jours === 0) {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        return;
+      }
+
+      let labels = [];
+      let data = [];
+
+      for (let day = 1; day <= jours; day++) {
+        labels.push("Jour " + day);
+        // intérêt simple cumulatif
+        data.push(montant + montant * tauxParJour * day);
+      }
+
+      chartInstance = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Montant accumulé (USDT)",
+              data: data,
+              fill: true,
+              backgroundColor: "rgba(0, 255, 255, 0.2)",
+              borderColor: "rgba(0, 255, 255, 0.8)",
+              borderWidth: 2,
+              pointRadius: 3,
+              pointBackgroundColor: "rgba(0, 255, 255, 1)",
+              tension: 0.2,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { color: "#00fff7" },
+              grid: { color: "rgba(0,255,255,0.1)" },
+            },
+            x: {
+              ticks: { color: "#00fff7" },
+              grid: { color: "rgba(0,255,255,0.1)" },
+            },
+          },
+          plugins: {
+            legend: { labels: { color: "#00fff7", font: { weight: "bold" } } },
+          },
+        },
+      });
+    }
+  </script>
+</body>
+</html>

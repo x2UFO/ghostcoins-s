@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Historique des transactions - GhostCoins</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Historique de vos dépôts et retraits</h1>
+  </header>
+
+  <main>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Montant (USDT)</th>
+        </tr>
+      </thead>
+      <tbody id="historiqueBody">
+        <!-- Les entrées seront insérées ici par JS -->
+      </tbody>
+    </table>
+    <a href="dashboard.html" class="dashboard-btn">Retour au Dashboard</a>
+  </main>
+
+  <script>
+    function afficherHistorique() {
+      const historique = JSON.parse(localStorage.getItem("ghostcoins_historique")) || [];
+      const tbody = document.getElementById("historiqueBody");
+      tbody.innerHTML = "";
+
+      if (historique.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3">Aucune transaction enregistrée.</td></tr>';
+        return;
+      }
+
+      historique.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item.date}</td>
+          <td>${item.type}</td>
+          <td>${item.montant.toFixed(2)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.onload = afficherHistorique;
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+depot.html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dépôt - GhostCoins</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="GhostCoins Logo" class="logo">
+    <h1>Faire un dépôt</h1>
+  </header>
+
+  <main class="depot-container">
+    <h2>Adresse de dépôt USDT (TRC20)</h2>
+    <div class="adresse-container" id="adresse-container">
+      <input type="text" id="adresseDepot" value="0x3E18c759cf42Bb1E7CB4c22c8E6480C7bBec3AF3" readonly>
+      <button onclick="copierAdresse()">Copier</button>
+    </div>
+    <p class="note">* Envoyez un minimum de <strong>20 USDT</strong>. Les fonds seront automatiquement crédités sur votre compte une fois validés.</p>
+
+    <a href="index.html" class="retour-btn">Retour au tableau de bord</a>
+  </main>
+
+  <script>
+    function copierAdresse() {
+      const input = document.getElementById("adresseDepot");
+      input.select();
+      input.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      alert("Adresse copiée : " + input.value);
+    }
+  </script>
+</body>
+</html>

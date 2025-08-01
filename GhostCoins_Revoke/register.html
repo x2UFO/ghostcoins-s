@@ -1,0 +1,50 @@
+register.html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription - GhostCoins</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="GhostCoins Logo" class="logo">
+    <h1>Créer un compte GhostCoins</h1>
+  </header>
+
+  <main>
+    <form id="registerForm">
+      <input type="email" id="email" placeholder="Adresse email" required>
+      <input type="password" id="password" placeholder="Mot de passe" required>
+      <input type="password" id="confirm" placeholder="Confirmer le mot de passe" required>
+      <button type="submit">Créer un compte</button>
+      <p class="note">Déjà inscrit ? <a href="connexion.html">Se connecter</a></p>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById('registerForm');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirm = document.getElementById('confirm').value;
+
+      if (password !== confirm) {
+        alert("Les mots de passe ne correspondent pas.");
+        return;
+      }
+
+      // Stockage fictif dans localStorage
+      localStorage.setItem("ghost_user_email", email);
+      localStorage.setItem("ghost_user_password", password);
+
+      alert("Compte créé avec succès ! Vous pouvez maintenant vous connecter.");
+      window.location.href = "connexion.html";
+    });
+  </script>
+</body>
+</html>
